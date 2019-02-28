@@ -25,6 +25,7 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^', include('snippets.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
