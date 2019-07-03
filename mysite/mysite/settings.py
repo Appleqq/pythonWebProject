@@ -25,8 +25,8 @@ SECRET_KEY = 'x*exop_$s99^s$+b9y#099z4b^brdk*(x%hz&wi^pcsi1rb%ll'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = ['dev.mysite.com',]
+ALLOWED_HOSTS = ['192.168.1.181', '127.0.0.1']
 
 # Application definition
 
@@ -121,7 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Static files (CSS, JavaScript, Images)
