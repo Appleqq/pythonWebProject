@@ -1,12 +1,25 @@
 
 from django.contrib.auth.models import User, Group
+from quickstart.models import Schools
 from rest_framework import viewsets
-from quickstart.serializers import UserSerializer, GroupSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from quickstart.serializers import UserSerializer, GroupSerializer, SchoolSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.http import HttpResponse
+
+
+def school_detail(request, pk):
+    """
+        获取，更新或删除一个 code user。
+        """
+    try:
+        user = Schools.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = SchoolSerializer(user)
+        return JSONResponse(serializer.data)
 
 
 def user_detail(request, pk):
@@ -34,11 +47,17 @@ def user_detail(request, pk):
         user.delete()
         return HttpResponse(status=204)
 
+
+class SchoolsViewSet(viewsets.ModelViewSet):
+    queryset = Schools.objects.all()
+    serializer_class = SchoolSerializer
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     允许用户查看或编辑API的路径
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 

@@ -21,11 +21,15 @@ from quickstart import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-url(r'^users/(?P<pk>[0-9]+)/$', views.user_detail),
 router.register(r'groups', views.GroupViewSet)
+router.register(r'schools', views.SchoolsViewSet)
+url(r'^users/(?P<pk>[0-9]+)/$', views.user_detail),
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^schools/(?P<pk>[0-9]+)/$', views.school_detail),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
 ]
